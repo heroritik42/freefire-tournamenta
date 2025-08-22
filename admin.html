@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - FreeFire Tournament</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body { font-family: Arial, sans-serif; background: #111; color: #fff; text-align: center; }
+    .container { width: 90%; margin: auto; padding: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    table, th, td { border: 1px solid #444; }
+    th, td { padding: 10px; }
+    th { background: #333; }
+    button { padding: 5px 10px; margin: 2px; border: none; cursor: pointer; border-radius: 5px; }
+    .approve { background: green; color: white; }
+    .reject { background: red; color: white; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>⚔️ Admin Panel - FreeFire Tournament</h1>
+    <h3>Registered Players</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Player Name</th>
+          <th>UID</th>
+          <th>Mode</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="playersTable">
+        <!-- Players data will be loaded here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // Example fake data (baad mein database se fetch hoga)
+    const players = [
+      { name: "HeroRitik", uid: "12345678", mode: "CS Mode", status: "Pending" },
+      { name: "Player2", uid: "87654321", mode: "Battle Royale", status: "Pending" }
+    ];
+
+    function loadPlayers() {
+      const table = document.getElementById("playersTable");
+      table.innerHTML = "";
+      players.forEach((p, i) => {
+        table.innerHTML += `
+          <tr>
+            <td>${p.name}</td>
+            <td>${p.uid}</td>
+            <td>${p.mode}</td>
+            <td>${p.status}</td>
+            <td>
+              <button class="approve" onclick="updateStatus(${i}, 'Approved')">Approve</button>
+              <button class="reject" onclick="updateStatus(${i}, 'Rejected')">Reject</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function updateStatus(index, status) {
+      players[index].status = status;
+      loadPlayers();
+    }
+
+    loadPlayers();
+  </script>
+</body>
+</html>
